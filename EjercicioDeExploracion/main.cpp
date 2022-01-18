@@ -4,12 +4,23 @@ using namespace std;
 int main()
 {
     //Ejercicio de exploracion de lenguaje, transformar un numero ingresado a binario y luego coger bit a bit desde el bit más y menos significativo
-
+    //Con el bit menos significativo
+    /*
     unsigned char vble5 = 0b10101010;
     for (unsigned short int ind = 0; ind < 8 ; ind ++)
     {
         short int residuo = vble5 & 0b00000001;
         vble5 = vble5 >>  1;
+        cout << residuo << endl;
+    }
+    */
+    //Con el bit mas significativo
+
+    unsigned char vble5 = 0b10101010;
+    for (unsigned short int ind = 0; ind < 9 ; ind ++)
+    {
+        short int residuo = vble5 & 1;
+        vble5 >>=  1;
         cout << residuo << endl;
     }
 
