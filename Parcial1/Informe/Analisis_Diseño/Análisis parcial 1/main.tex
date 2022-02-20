@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{cite}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+            
+        \Huge
+        \textbf{Análisis y Diseño Parcial 1}
+            
+        \vspace{0.5cm}
+        \LARGE
+        Sistema de encriptación 
+            
+        \vspace{5cm}
+            
+        \textbf{Maria Fernanda Tasco ALquichire}
+            
+        \vfill
+            
+        \vspace{0.8cm}
+            
+        \Large
+        Despartamento de Ingeniería Electrónica y Telecomunicaciones\\
+        Universidad de Antioquia\\
+        Medellín\\
+        Febrero de 2022
+            
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Objetivos}\label{intro}
+\subsection{generales}
+resumen - abstrac
+\subsection{Especificos}
+introducion
+
+\section{Sección introductoria}\label{intro}
+\subsection{Resumen}
+resumen - abstrac
+\subsection{Introdución}
+introducion
+
+
+\section{Marco Teorico} \label{investigación}
+Esta sección es para agregar toda la información correspondiente con código, citas, etc.
+
+\subsection{Terminología / preguntas en la investigación}
+\subsubsection*{¿Qué es, para qué sirve y cómo se usa la señal de reloj?}
+Una \textbf{Señal de Reloj} \cite{SeñalReloj} es una señal usada para coordinar las acciones de 2 o más circuitos o sistemas. Oscila entre estado alto y bajo en forma de señal cuadrada. 
+\\[0.2cm]
+Es producida por un generador de reloj y usualmente empleando una frecuencia fija constante.
+\\[0.2cm]
+La mayoria de los circuitos integrados complejos utilizan una señal de reloj para sincronizar sus diferentes partes y controlar los tiempos de propagación.
+\subsubsection*{74HC595}
+El circuito integrado 74HC595 es un registro de desplazamiento que cuenta con entrada en serie y salida en paralelo de 8 bits.
+ sus valores en la salida dependen simplemente de los valores de la entrada y de valores anteriores almacenados.
+  Este registro se compone de una serie de biestables o flip-flops de tipo D comandados por una señal de reloj. Esos biestables son memorias que mantienen un valor anterior. Cada uno almacena un bit y, de su nombre también puedes deducir que, los puede desplazar. Al correr los bits de un lado a otro podemos hacer operaciones digitales bastante interesantes.
+ ¿Para qué desplazar bits? Desplazar bits de datos puede resultar muy práctico. Un motivo es que se necesite desplazar los valores por un objetivo concreto. Pero también desplazar supone realizar algunas operaciones sobre los bits almacenados. Por ejemplo, desplazar a la izquierda un conjunto de bits es como multiplicarlos por 2. Desplazarlos a la derecha es como dividir entre 2. Por tanto, para hacer multiplicaciones y divisiones binarias pueden ser muy prácticos…
+ Las entrada la tiene en serie y la salida en paralelo. Por tanto, con una sola entrada, se pueden controlar a la vez esas 8 salidas. Solo necesitarás tres pines del microcontrolador usado (p.e.: Arduino) para manejarlo. Esas son Latch, Clock y Data. Latch es el pin 13 en este caso, aunque puede variar, por eso debes consultar el datasheet de tu fabricante. Clock puede estar en el 11 u otros, y el bit de datos es el 14.
+ La señal de reloj alimentará al circuito para determinar el compás o ritmo al que va a trabajar. La salida de datos cambiará el comportamiento del chip. Por ejemplo, al cambiar de LOW a HIGH y generar el nuevo pulso de reloj pasando el clock de HIGH a LOW, lo que se consigue es grabar la posición actual donde se encuentre el desplazamiento el valor ingresado por este pin de datos. Si repites esto 8 veces, entonces habrás grabado las 8 posiciones y tener un byte almacenado (Q0-Q7).
+ 
+ El 595 tiene dos registros (que se pueden considerar como «contenedores de memoria»), cada uno con sólo 8 bits de datos. El primero se llama Registro de Turno. El Registro de Turno se encuentra en lo profundo de los circuitos IC, aceptando silenciosamente la entrada.
+
+Cada vez que aplicamos un pulso de reloj a un 595, ocurren dos cosas:
+
+Los bits del Registro de Turnos se mueven un paso a la izquierda. Por ejemplo, el bit 7 acepta el valor que antes estaba en el bit 6, el bit 6 obtiene el valor del bit 5, etc.
+El bit 0 del Registro de Turnos acepta el valor actual en el pin DATA. En el borde ascendente del pulso, si el pin de datos es alto, entonces un 1 se empuja en el registro de desplazamiento. De lo contrario, es un 0.
+
+Al activar la clavija Latch, el contenido del Registro de Desplazamientos se copia en el segundo registro, llamado Registro de Almacenamiento/Latch. Cada bit del Registro de almacenamiento está conectado a uno de los pines de salida QA-QH del IC, así que en general, cuando el valor del Registro de almacenamiento cambia, también lo hacen las salidas.
+
+\subsection{Investgación soluciuones propuestas}
+bojgkkjiofsdfblgfkpbpkmsdjkpdg
+
+
+\section{Marco Expremiental} \label{practica}
+Una clave para el desarrollo del algoritmo fue el orden de los pasos, ya que un orden adecuado, omitir algunos pasos o no generar las condiciones necesarias para el buen desarrollo de la solución, podría generar alguna ambigüedad o error. \textbf{Señalreloj7400} \cite{Señalreloj7400}
+\\[0.2cm]
+Aprendí la importancia de analizar bien el orden de los pasos, las condiciones, las variables de entrada, lo que me están pidiendo para así generar una solución óptima, sin ambigüedades, eficaz y fácil de entender.
+
+
+\section{Resultados} \label{conclusiones}
+Una clave para el desarrollo del algoritmo fue el orden de los pasos, ya que un orden adecuado, omitir algunos pasos o no generar las condiciones necesarias para el buen desarrollo de la solución, podría generar alguna ambigüedad o error.
+
+\section{Conclusiones} \label{conclusiones}
+Una clave para el desarrollo del algoritmo fue el orden de los pasos, ya que un orden adecuado, omitir algunos pasos o no generar las condiciones necesarias para el buen desarrollo de la solución, podría generar alguna ambigüedad o error.
+
+
+
+(\ref{intro}), (\ref{contenido}) y (\ref{imagenes})
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
+
