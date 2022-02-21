@@ -3,7 +3,7 @@
 \usepackage[spanish]{babel}
 \usepackage{listings}
 \usepackage{graphicx}
-\graphicspath{ {images/} }
+\graphicspath{ {/home/mafeta/Imágenes/parcial1}}
 \usepackage{cite}
 
 \begin{document}
@@ -57,36 +57,46 @@ Esta sección es para agregar toda la información correspondiente con código, 
 
 \subsection{Terminología / preguntas en la investigación}
 \subsubsection*{¿Qué es, para qué sirve y cómo se usa la señal de reloj?}
-Una \textbf{Señal de Reloj} \cite{SeñalReloj} es una señal usada para coordinar las acciones de 2 o más circuitos o sistemas. Oscila entre estado alto y bajo en forma de señal cuadrada. 
+Una \textbf{Señal de Reloj} \cite{señal_reloj} es una señal usada para coordinar las acciones de 2 o más circuitos o sistemas. Oscila entre estado alto y bajo en forma de señal cuadrada. 
 \\[0.2cm]
 Es producida por un generador de reloj y usualmente empleando una frecuencia fija constante.
 \\[0.2cm]
 La mayoria de los circuitos integrados complejos utilizan una señal de reloj para sincronizar sus diferentes partes y controlar los tiempos de propagación.
-\subsubsection*{74HC595}
-El circuito integrado 74HC595 es un registro de desplazamiento que cuenta con entrada en serie y salida en paralelo de 8 bits.
- sus valores en la salida dependen simplemente de los valores de la entrada y de valores anteriores almacenados.
-  Este registro se compone de una serie de biestables o flip-flops de tipo D comandados por una señal de reloj. Esos biestables son memorias que mantienen un valor anterior. Cada uno almacena un bit y, de su nombre también puedes deducir que, los puede desplazar. Al correr los bits de un lado a otro podemos hacer operaciones digitales bastante interesantes.
- ¿Para qué desplazar bits? Desplazar bits de datos puede resultar muy práctico. Un motivo es que se necesite desplazar los valores por un objetivo concreto. Pero también desplazar supone realizar algunas operaciones sobre los bits almacenados. Por ejemplo, desplazar a la izquierda un conjunto de bits es como multiplicarlos por 2. Desplazarlos a la derecha es como dividir entre 2. Por tanto, para hacer multiplicaciones y divisiones binarias pueden ser muy prácticos…
- Las entrada la tiene en serie y la salida en paralelo. Por tanto, con una sola entrada, se pueden controlar a la vez esas 8 salidas. Solo necesitarás tres pines del microcontrolador usado (p.e.: Arduino) para manejarlo. Esas son Latch, Clock y Data. Latch es el pin 13 en este caso, aunque puede variar, por eso debes consultar el datasheet de tu fabricante. Clock puede estar en el 11 u otros, y el bit de datos es el 14.
- La señal de reloj alimentará al circuito para determinar el compás o ritmo al que va a trabajar. La salida de datos cambiará el comportamiento del chip. Por ejemplo, al cambiar de LOW a HIGH y generar el nuevo pulso de reloj pasando el clock de HIGH a LOW, lo que se consigue es grabar la posición actual donde se encuentre el desplazamiento el valor ingresado por este pin de datos. Si repites esto 8 veces, entonces habrás grabado las 8 posiciones y tener un byte almacenado (Q0-Q7).
- 
- El 595 tiene dos registros (que se pueden considerar como «contenedores de memoria»), cada uno con sólo 8 bits de datos. El primero se llama Registro de Turno. El Registro de Turno se encuentra en lo profundo de los circuitos IC, aceptando silenciosamente la entrada.
-
-Cada vez que aplicamos un pulso de reloj a un 595, ocurren dos cosas:
-
-Los bits del Registro de Turnos se mueven un paso a la izquierda. Por ejemplo, el bit 7 acepta el valor que antes estaba en el bit 6, el bit 6 obtiene el valor del bit 5, etc.
-El bit 0 del Registro de Turnos acepta el valor actual en el pin DATA. En el borde ascendente del pulso, si el pin de datos es alto, entonces un 1 se empuja en el registro de desplazamiento. De lo contrario, es un 0.
-
-Al activar la clavija Latch, el contenido del Registro de Desplazamientos se copia en el segundo registro, llamado Registro de Almacenamiento/Latch. Cada bit del Registro de almacenamiento está conectado a uno de los pines de salida QA-QH del IC, así que en general, cuando el valor del Registro de almacenamiento cambia, también lo hacen las salidas.
+\subsubsection*{¿74HC595?}
+El circuito integrado 74HC595 es un \textbf{registro de desplazamiento} \cite{74HC595Informacion}  que cuenta con entrada en serie y salida en paralelo de 8 bits. Lo que quiere decir es que en este \textbf{tipo de registros} \cite{tipo_de_registros} con salida en paralelo se dispone de la salida de cada \textbf{flip-flop o biestable} \cite{flip-flop_o_biestable} por lo que una vez almacenados los datos cada bits se representa en su respectiva salida. Por tanto, con una sola entrada, se pueden controlar a la vez esas 8 salidas
+\\[0.2cm]
+Sus valores en la salida dependen de los valores de la entrada y de valores anteriores almacenados. Este registro se compone de una serie de biestables o flip-flops de tipo D comandados por una señal de reloj. Esos \textbf{biestables} \cite{flip-flop_o_biestable} son dispositivoz capaces de memorizar la información a la que antes hacía referencia. Almacena el estado 1 y 0. 
+\\[0.2cm]
+El desplazamiento de datos \textbf{se puede implementar} \cite{74hc595_como_funciona} utilizando puertas lógicas que permitan la transferencia de un bits de datos de una etapa a la siguiente de la izquierda o de la derecha dependiendo del nivel de una línea de control.
+Dependiendo del sistema de desencriptación el circuito integrado 74hc595 nos va a ayudar a hacer un desplazamiento a la derecha o a la izquierda para coger los 8 bits que habían pasado o estaban por venir en referencia al valor para clasificar.
+\\[0.2cm]
+\textbf{Otra utilidad} \cite{registro_desplazamiento_almacenamiento} que tiene este CI en especial es el RCLK (Registro de reloj/Latch) Cuando este en BAJO (LOW), el contenido del registro de desplazamiento (los 8 bits) se copia en el registro de almacenamiento; que finalmente se muestra en la salida. Eso permite que mientras se realiza este proceso se puedan ir ingresando datos en serie usando el SRCLR (Shift Register Clear) que reinicia todo el registro de desplazamiento, haciendo que todos sus bits sean 0, cuando este esta en LOW y así dando paso a que el SRCLK (Shift Register Clock) que registra el cambio y desplaza los bits en el registro de desplazamiento, cuando este esta en HIGH.
+\\[0.2cm]
+Se puede ver la implementación de este CI con pulsadores / switches y con arduino en la sección de marco experimental.
 
 \subsection{Investgación soluciuones propuestas}
-bojgkkjiofsdfblgfkpbpkmsdjkpdg
+aun no he investigado nada
 
 
 \section{Marco Expremiental} \label{practica}
-Una clave para el desarrollo del algoritmo fue el orden de los pasos, ya que un orden adecuado, omitir algunos pasos o no generar las condiciones necesarias para el buen desarrollo de la solución, podría generar alguna ambigüedad o error. \textbf{Señalreloj7400} \cite{Señalreloj7400}
-\\[0.2cm]
-Aprendí la importancia de analizar bien el orden de los pasos, las condiciones, las variables de entrada, lo que me están pidiendo para así generar una solución óptima, sin ambigüedades, eficaz y fácil de entender.
+\subsection*{74HC595 Ejemplo de uso con pulsadores / switches}
+Para esta primera implementación de ejemplo se probará el 74HC595 con un \textbf{pulsador} \cite{74hc595_pulsador} que registra los desplazamientos, otro que registra la salida y el interruptor deslizante como entrada (HIGH-LOW).
+
+\begin{figure}[h!]
+\caption{Uso 74HC595 con pulsadores en \textbf{tinkercad} \cite{ejem_74HC595_pulsadores}}
+\centering
+\includegraphics[width=0.5\textwidth]{ejem_75hc595_pulsadores.png}
+\end{figure}
+
+Por último se implementó el CI con arduino, en este caso colocando los 3 pines principales en los pines digitales de arduino, también se hizó uso de la función shiftOut(); de \textbf{arduino} \cite{shiftOut_arduino}
+
+\begin{figure}[h!]
+\caption{Uso 74HC595 con arduino en \textbf{tinkercad} \cite{ejem_74hc595_arduino}}
+\centering
+\includegraphics[width=0.5\textwidth]{Ejem_74hc595_arduino.png}
+\end{figure}
+
+con esto se concluye que 
 
 
 \section{Resultados} \label{conclusiones}
