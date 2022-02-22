@@ -1,0 +1,31 @@
+#include <Wire.h>
+void setup(){
+  pinMode(13,OUTPUT);
+  pinMode(12,OUTPUT);
+  pinMode(11,OUTPUT);
+  pinMode(10,OUTPUT);
+  pinMode(9,OUTPUT);
+  
+  // le indica al arduino maestro que el esclavo le mando un dato
+  Wire.begin(1);
+  //registro que recibí datos
+  Wire.onReceive(receiveEvent);
+  //
+  Serial.begin(9600);
+  }
+void loop (){
+  delay(300);
+  }
+
+//función que se ejecuta cuando se recibe un dato del esclavo
+void receiveEvent(int cuando){
+  int pinOut = 0;
+  int estado = 0;
+  if (Wire.available() == 2){
+    	pinOut=Wire.read();
+    }
+  if (Wire.available() == 1){
+    	estado=Wire.read();
+    }
+  digitalWrite(pinOut,estado);
+  }

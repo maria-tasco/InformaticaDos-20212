@@ -1,0 +1,26 @@
+#include <Wire.h>
+void setup()
+{
+  Wire.begin(1);
+}
+
+byte pin[] = {13,12,11,10,9};
+byte estado =0;
+
+void loop()
+{
+  for (int i =0; i<5; i++) {
+    Wire.beginTransmission(1); //activas la trasnmision de datos
+    //enviar el byte
+    Wire.write(pin[i]);
+    //enviar si estará apagado o encendido despues de tener el pin al cual voy a escribir
+    Wire.write(estado);
+    Wire.endTransmission();
+    delay(1000);
+    }
+  //cambio de estado
+  if (estado == 0){
+    estado =1;}
+  else{
+    estado=0;}
+}
