@@ -1,7 +1,6 @@
 #include "manejo_archivo.h"
 
-int main()
+manejo_archivo::manejo_archivo()
 {
 
-    return 0;
 }

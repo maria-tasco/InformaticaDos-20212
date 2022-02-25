@@ -4,8 +4,4 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp \
-        manejo_archivo.cpp
-
-HEADERS += \
-    manejo_archivo.h
+        main.cpp
