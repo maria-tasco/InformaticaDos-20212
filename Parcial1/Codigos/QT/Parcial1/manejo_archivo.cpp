@@ -7,20 +7,16 @@ void crear(char *nombre)
     text.close();
 }
 
-void escribir(char *nombre, char *datos, unsigned long long tam, bool tipo)
+void escribir(char *nombre, unsigned char *datos, unsigned long long tam)
 {
     //datos tengo guarda la información normal para leer
     fstream text;
-    if (tipo){ //si tipo es verdadero voy a escribir el archivo en modo convencional
-        text.open(nombre, fstream::out);
-        text << datos;
-    }
-    else { //voy a escribir el archivo en modo binario
-        text.open(nombre, fstream::out | fstream::binary);
-        text.write(datos,tam);
-    }
+    //si tipo es verdadero voy a escribir el archivo en modo convencional
+    text.open(nombre, fstream::out);
+    text << datos;
     text.close();
 }
+
 unsigned long long tam(char *nombre) {
     unsigned long long tam = 0;
     fstream text(nombre, fstream::in| fstream::ate | fstream::binary);
@@ -31,7 +27,7 @@ unsigned long long tam(char *nombre) {
 }
 
 
-bool leer(char *nombre, unsigned long long tam, char *data)
+bool leer(char *nombre, unsigned long long tam,unsigned char *data)
 {
     fstream text(nombre, fstream::in | fstream::binary);
     bool confirma = text.is_open();

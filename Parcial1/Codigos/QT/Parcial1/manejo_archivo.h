@@ -7,8 +7,8 @@
 using namespace std;
 
 void crear (char *nombre);
-void escribir(char *nombre, char *datos, unsigned long long int tam, bool tipo);
+void escribir(char *nombre,unsigned char *datos, unsigned long long int tam);
 unsigned long long tam(char *nombre);
-bool leer (char *nombre, unsigned long long tam,char *data);
+bool leer (char *nombre, unsigned long long tam,unsigned char *data);
 
 #endif // MANEJO_ARCHIVO_H
