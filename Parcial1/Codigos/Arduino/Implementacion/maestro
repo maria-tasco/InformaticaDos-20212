@@ -1,0 +1,38 @@
+byte const array_inicial[]={4,5,6,59,2,1,4,0,2,4,5,8,7,4,2,5,15,20,14,78,24,2,5,20};
+byte const array_lcd[];//memoria dinamica
+int estado = 0;
+int led_clasificador = 6;
+unsigned long int pos1 =0,pos2=0;
+void setup()
+{
+  pinMode(12, OUTPUT);
+  pinMode(led_clasificador, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+    //leer si el led esta encendido o no
+  estado = digitalRead(led_clasificador);
+  if(estado == HIGH){
+    digitalWrite(12,HIGH);
+    delay(50);
+    array_lcd[pos2]=array_inicial[pos1-1];
+    array_lcd[pos2+1]=array_inicial[pos1-2];
+    if(multiplo(array_inicial[pos1+1]) == true){
+      array_lcd[pos2+1]=array_inicial[pos1+1];
+      }
+    Serial.println("clave");
+    delay(5000);
+    } 
+  else {
+    digitalWrite(12,LOW);
+    array_inicial[pos1];
+    pos++;
+    delay(50);
+   } 
+}
+bool multiplo (byte const){
+  
+  array_inicial[pos1+1];
+  }

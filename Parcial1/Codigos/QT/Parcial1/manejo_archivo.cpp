@@ -13,7 +13,13 @@ void escribir(char *nombre, unsigned char *datos, unsigned long long tam)
     fstream text;
     //si tipo es verdadero voy a escribir el archivo en modo convencional
     text.open(nombre, fstream::out);
-    text << datos;
+    text<< "={";
+    for(unsigned long long i=0; i<tam-1; i++){
+        text <<datos[i];
+        if (i != tam - 2) text << ",";
+
+    }
+    text<< "}";
     text.close();
 }
 
@@ -37,7 +43,7 @@ bool leer(char *nombre, unsigned long long tam,unsigned char *data)
                 data[i]=text.get();//con la función get obtenemos los caracteres de el archivo de texto uno a uno y se lo vamos dando a cada posición de la variable char
 
             data[tam]='\0'; //después de leer y pasar lo que leimos al arreglo colocamos en la última posición el caracter de fin de cadena
-            cout << data << endl;
+            cout <<data;
 
         }  catch (bad_alloc) {
             cout << "el archivo ingresado es muy pesado para el sistema" << endl;

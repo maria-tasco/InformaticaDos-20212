@@ -11,6 +11,6 @@ int main()
     //leí y toda mi información la tengo en data
     //la voy a pasar en forma de arreglo a otro archivo .txt para poder
     //pasar la información en forma de arreglo al tinkercad.
-
+    escribir(archivo_array,data,tamArchivo);
     return 0;
 }
