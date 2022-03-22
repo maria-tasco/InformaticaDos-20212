@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include "tpila1.h"
 using namespace std;
 
 template <typename T>
@@ -50,6 +51,44 @@ int main(int argc, char *argv[] )
     myobjectfloat.getmax();
 
 // EJERCICIO: CREACIÓN DE UNA PILA DE ALMACENAMIENTO
+    Pila<double> pilaDouble(5);
+    double d=1.1;
+    cout << "colocando elementos en la pila: " << endl;
+    try {
+        while (true) {
+            if(pilaDouble.push(d)){
+                cout << d << " , ";
+                d+= 1.1;
+            }
+            else {
+                throw out_of_range("Pila<>::push: pila llena");
+            }
+        }
+    }  catch (exception const& ex) {
+        cerr << "\nException: "<< ex.what() << endl;
+    }
+    cout << "\nla pila esta llena\n" << endl;
 
+    cout << "sacando elementos de la pila" << endl;
+    while(pilaDouble.pop(d)){
+        cout << d << " ";
+    }
+    cout << "la pila esta vacia" << endl;
+
+
+    Pila<int> pilaInt;
+    int e=1;
+    cout << "colocando elementos en la pila: " << endl;
+    while (pilaInt.push(e)) {
+        cout << e << " ";
+        ++ e;
+    }
+    cout << "\nla pila esta llena\n" << endl;
+
+    cout << "sacando elementos de la pila" << endl;
+    while(pilaInt.pop(e)){
+        cout << e << " ";
+    }
+    cout << "la pila esta vacia" << endl;
     return 0;
 }
