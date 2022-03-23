@@ -27,6 +27,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     unsigned char posSlider;
+    QGraphicsScene *scene;
     // QPushButton *b1; Agregar boton por código
 };
 #endif // MAINWINDOW_H

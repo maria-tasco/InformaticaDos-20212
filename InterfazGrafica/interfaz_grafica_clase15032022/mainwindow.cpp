@@ -7,6 +7,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     posSlider=1;
+    scene = new QGraphicsScene();
+    //scene ->addText("hola");
+    scene->addRect(100,100,100,100);
+    scene->addEllipse(50,50,50,50);
+    ui->graphicsView->setScene(scene);
 }
 
 MainWindow::~MainWindow()
